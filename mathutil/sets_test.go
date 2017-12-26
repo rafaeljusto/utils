@@ -63,3 +63,30 @@ func TestComplementsInt(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkComplementsInt_equal(b *testing.B) {
+	listA := []int64{1, 2, 3}
+	listB := []int64{1, 2, 3}
+
+	for n := 0; n < b.N; n++ {
+		ComplementsInt(listA, listB)
+	}
+}
+
+func BenchmarkComplementsInt_disjoint(b *testing.B) {
+	listA := []int64{1, 2, 3}
+	listB := []int64{5, 6, 7}
+
+	for n := 0; n < b.N; n++ {
+		ComplementsInt(listA, listB)
+	}
+}
+
+func BenchmarkComplementsInt_overlap(b *testing.B) {
+	listA := []int64{1, 2, 3, 4}
+	listB := []int64{3, 4, 5, 6}
+
+	for n := 0; n < b.N; n++ {
+		ComplementsInt(listA, listB)
+	}
+}
