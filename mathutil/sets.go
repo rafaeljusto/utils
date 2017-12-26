@@ -17,11 +17,11 @@ func ComplementsInt(a, b []int64) (aOnly, bOnly []int64) {
 	var aIndex, bIndex int
 	for aIndex < len(aCopy) && bIndex < len(bCopy) {
 		if aCopy[aIndex] < bCopy[bIndex] {
-			aOnly = append(aOnly, aCopy[aIndex])
+			aOnly = appendIfUnique(aOnly, aCopy[aIndex])
 			aIndex++
 
 		} else if bCopy[bIndex] < aCopy[aIndex] {
-			bOnly = append(bOnly, bCopy[bIndex])
+			bOnly = appendIfUnique(bOnly, bCopy[bIndex])
 			bIndex++
 
 		} else {
@@ -31,16 +31,24 @@ func ComplementsInt(a, b []int64) (aOnly, bOnly []int64) {
 	}
 
 	for aIndex < len(aCopy) {
-		aOnly = append(aOnly, aCopy[aIndex])
+		aOnly = appendIfUnique(aOnly, aCopy[aIndex])
 		aIndex++
 	}
 
 	for bIndex < len(bCopy) {
-		bOnly = append(bOnly, bCopy[bIndex])
+		bOnly = appendIfUnique(bOnly, bCopy[bIndex])
 		bIndex++
 	}
 
 	return aOnly, bOnly
+}
+
+func appendIfUnique(l []int64, n int64) []int64 {
+	if len(l) == 0 || l[len(l)-1] != n {
+		return append(l, n)
+	}
+
+	return l
 }
 
 // int64Sorted add the sort capability to a slice of int64.

@@ -48,6 +48,13 @@ func TestComplementsInt(t *testing.T) {
 			aExpected: []int64{1, 2},
 			bExpected: []int64{5, 6},
 		},
+		{
+			name:      "Overlap with unordered repeated input",
+			a:         []int64{6, 4, 5, 3, 6},
+			b:         []int64{2, 1, 4, 3},
+			aExpected: []int64{5, 6},
+			bExpected: []int64{1, 2},
+		},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
